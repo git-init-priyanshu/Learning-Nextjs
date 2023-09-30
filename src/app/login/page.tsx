@@ -19,10 +19,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (
-      user.email.length > 0 &&
-      user.password.length > 0
-    ) {
+    if (user.email.length > 0 && user.password.length > 0) {
       setButtonDisabled(false);
     } else {
       setButtonDisabled(true);
@@ -40,7 +37,7 @@ export default function LoginPage() {
       //   error: (data) => `${data}`,
       // });
 
-      const response = await axios.post("/api/users/login", user)
+      const response = await axios.post("/api/users/login", user);
 
       console.log(response.data);
 
@@ -82,9 +79,15 @@ export default function LoginPage() {
         />
         <button
           onClick={onLogin}
-          className="p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+          disabled={buttonDisabled}
+          className={`p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600
+          ${
+            buttonDisabled
+              ? " border-gray-500 text-gray-400"
+              : "border-gray-300 text-white"
+          }`}
         >
-          Signup here
+          Login here
         </button>
         <Link href="/signup">Not a user? Signup here</Link>
       </div>
