@@ -17,6 +17,7 @@ export default function VefifyEmailPage({ params }: any) {
   useEffect(() => {
     const token = searchParams.get("token");
     setToken(token || "");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
