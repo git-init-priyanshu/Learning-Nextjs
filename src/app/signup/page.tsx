@@ -58,7 +58,7 @@ export default function SignupPage() {
       <Toaster position="top-right" reverseOrder={false} />
 
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1>{loading ? "Loading..." : "Signup"}</h1>
+        <h1 className=" text-3xl mb-3">{loading ? "Loading..." : "Signup"}</h1>
         <hr />
         {/* Username */}
         <label htmlFor="username">Username</label>
@@ -99,7 +99,7 @@ export default function SignupPage() {
         <button
           onClick={onSignup}
           disabled={buttonDisabled}
-          className={`p-2 border rounded-lg mb-4  focus:outline-none focus:border-gray-600 
+          className={`p-2 text-sm border rounded-lg mb-4  focus:outline-none focus:border-gray-600 
           ${
             buttonDisabled
               ? " border-gray-500 text-gray-400"
@@ -108,7 +108,7 @@ export default function SignupPage() {
         >
           Signup here
         </button>
-        <Link href="/login">Already a user?</Link>
+        <Link href="/login" className=" hover:underline">Already a user? Login here</Link>
       </div>
     </>
   );

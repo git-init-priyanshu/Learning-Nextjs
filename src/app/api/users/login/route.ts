@@ -19,13 +19,13 @@ export const POST = async (req: NextRequest) => {
         { status: 400 }
       );
     }
-
+    
     // Check if password is correct
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
       return NextResponse.json({ error: "Invalid Password" }, { status: 400 });
     }
-
+    
     // Create token data
     const tokenData = {
       id: user._id,

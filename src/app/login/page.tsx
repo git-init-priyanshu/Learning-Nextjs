@@ -48,10 +48,22 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
+
+  const forgetPassword = async () => {
+    try {
+      setLoading(true);
+      if (!user.email) alert("Please enter your email first");
+      await axios.post("/api/users/sendEmail", { email: user.email });
+    } catch (error: any) {
+      console.log(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className="flex flex-col items-center justify-center min-h-screen py-2">
-        <h1>{loading ? "Loading..." : "Login"}</h1>
+        <h1 className=" text-3xl mb-3">{loading ? "Loading..." : "Login"}</h1>
         <hr />
         {/* Email */}
         <label htmlFor="email">Email</label>
@@ -77,19 +89,29 @@ export default function LoginPage() {
             setUser({ ...user, password: e.target.value });
           }}
         />
-        <button
-          onClick={onLogin}
-          disabled={buttonDisabled}
-          className={`p-2 border border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600
+        <div className="flex gap-6">
+          <button
+            onClick={onLogin}
+            disabled={buttonDisabled}
+            className={`p-2 border text-sm border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600
           ${
             buttonDisabled
               ? " border-gray-500 text-gray-400"
               : "border-gray-300 text-white"
           }`}
-        >
-          Login here
-        </button>
-        <Link href="/signup">Not a user? Signup here</Link>
+          >
+            Login
+          </button>
+          <button
+            onClick={forgetPassword}
+            className="p-2 border text-sm border-gray-300 rounded-lg mb-4 focus:outline-none focus:border-gray-600"
+          >
+            Forget Password
+          </button>
+        </div>
+        <Link href="/signup" className=" hover:underline">
+          Not a user? Signup here
+        </Link>
       </div>
     </>
   );
